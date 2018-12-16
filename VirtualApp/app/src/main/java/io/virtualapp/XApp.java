@@ -38,7 +38,6 @@ public class XApp extends Application {
 
     @Override
     protected void attachBaseContext(Context base) {
-        //添加注释
         gApp = this;
         super.attachBaseContext(base);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
