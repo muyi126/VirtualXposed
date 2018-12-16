@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
  * @date 2018/7/5.
  */
 public class DialogUtil {
+    //注释
     public static void showDialog(AlertDialog dialog) {
         if (dialog == null) {
             return;
