@@ -67,6 +67,7 @@ const char hexcode[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', '
 // 君子坦荡荡，小人常戚戚
 // 这个类没有别的用途，就是用来防止别人直接通过我编译好的APK进行修改操作
 // 如果你是源码编译，删掉即可
+//注释掉
 // The gentleman is frank and the villains are often sad
 // This class has no other purpose. It is used to prevent others from directly modifying the compiled APK.
 // If you are compiling source code, delete it
