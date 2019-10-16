@@ -12,7 +12,7 @@
 
 警告
 -------
-本项目使用的 VirtualApp 不允许用于商业用途，如果有这个需求，请联系 Lody (imlody@foxmail.com)。
+本项目使用的 VirtualApp 不允许用于商业用途，并且其内部的 VirtualApp 版本已经过时，如果有这个需求，为了贵公司的长期稳定发展，请使用商业授权，联系 Lody (imlody@foxmail.com)即可。
 
 使用
 ----------

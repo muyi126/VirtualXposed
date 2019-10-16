@@ -10,6 +10,7 @@ import android.os.IInterface;
 import android.os.ParcelFileDescriptor;
 
 import com.lody.virtual.client.hook.base.MethodBox;
+import com.lody.virtual.helper.compat.BuildCompat;
 import com.lody.virtual.helper.utils.VLog;
 
 import java.lang.reflect.InvocationHandler;
@@ -151,7 +152,8 @@ public class ProviderHook implements InvocationHandler {
             e.printStackTrace();
         }
         MethodBox methodBox = new MethodBox(method, mBase, args);
-        int start = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? 1 : 0;
+        int start = BuildCompat.isQ() ? 2 : (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? 1 : 0);
+
         try {
             String name = method.getName();
             if ("call".equals(name)) {

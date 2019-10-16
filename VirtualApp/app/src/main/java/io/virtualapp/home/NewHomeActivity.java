@@ -8,7 +8,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -21,14 +20,10 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.launcher3.LauncherFiles;
@@ -51,6 +46,7 @@ import io.virtualapp.abs.ui.VUiKit;
 import io.virtualapp.settings.SettingsActivity;
 import io.virtualapp.update.VAVersionService;
 import io.virtualapp.utils.Misc;
+import jonathanfinerty.once.Once;
 
 import static io.virtualapp.XApp.XPOSED_INSTALLER_PACKAGE;
 
@@ -82,9 +78,8 @@ public class NewHomeActivity extends NexusLauncherActivity {
         showMenuKey();
         mUiHandler = new Handler(getMainLooper());
         alertForMeizu();
-        alertForDoze();
+        alertForDonate();
         mDirectlyBack = sharedPreferences.getBoolean(SettingsActivity.DIRECTLY_BACK_KEY, false);
-        alertForExp();
     }
 
     private void installXposed() {
@@ -239,6 +234,26 @@ public class NewHomeActivity extends NexusLauncherActivity {
         }
     }
 
+    private void alertForDonate() {
+        final String TAG = "show_donate";
+        if (Once.beenDone(Once.THIS_APP_VERSION, TAG)) {
+            alertForDoze();
+            return;
+        }
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                .setTitle(R.string.about_donate)
+                .setMessage(R.string.donate_dialog_content)
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                    Misc.showDonate(this);
+                    Once.markDone(TAG);
+                })
+                .create();
+        try {
+            alertDialog.show();
+        } catch (Throwable ignored) {
+        }
+    }
+
     private void alertForMeizu() {
         if (!DeviceUtil.isMeizuBelowN()) {
             return;
@@ -252,61 +267,6 @@ public class NewHomeActivity extends NexusLauncherActivity {
                     .setTitle(R.string.meizu_device_tips_title)
                     .setMessage(R.string.meizu_device_tips_content)
                     .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                    })
-                    .create();
-            try {
-                alertDialog.show();
-            } catch (Throwable ignored) {
-            }
-        }, 2000);
-    }
-
-    protected int dp2px(float dp) {
-        final float scale = getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5f);
-    }
-
-    private void alertForExp() {
-        final String shown = "_exp_has_alert3";
-        boolean aBoolean = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(shown, false);
-        if (aBoolean) {
-            return;
-        }
-
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.VERTICAL);
-
-        int _20dp = dp2px(20);
-        layout.setPadding(_20dp, _20dp, _20dp, _20dp);
-
-        TextView tv = new TextView(this);
-        tv.setTextColor(Color.BLACK);
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        tv.setText(R.string.exp_tips);
-        layout.addView(tv);
-
-        CheckBox checkBox = new CheckBox(this);
-        checkBox.setText("不再提示");
-        checkBox.setOnClickListener(v -> {
-            if (checkBox.isChecked()) {
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(shown, true).apply();
-            }
-        });
-
-        layout.addView(checkBox);
-        mUiHandler.postDelayed(() -> {
-            AlertDialog alertDialog = new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.exp_introduce_title)
-                    .setView(layout)
-                    .setPositiveButton(R.string.exp_introduce_install, (dialog, which) -> {
-                        Intent t = new Intent(Intent.ACTION_VIEW);
-                        t.setData(Uri.parse("https://www.coolapk.com/apk/me.weishu.exp"));
-                        try {
-                            startActivity(t);
-                        } catch (Throwable ignored) {
-                        }
-                    }).setNegativeButton(R.string.about_donate_title, (dialog, which) -> {
-                        Misc.showDonate(NewHomeActivity.this);
                     })
                     .create();
             try {

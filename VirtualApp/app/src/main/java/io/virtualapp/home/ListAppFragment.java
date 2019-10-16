@@ -130,7 +130,7 @@ public class ListAppFragment extends VFragment<ListAppContract.ListAppPresenter>
                                 .setMessage(R.string.install_taichi_while_old_version)
                                 .setPositiveButton(R.string.install_go_latest_exp, (dialog1, which1) -> {
                                     Intent t = new Intent(Intent.ACTION_VIEW);
-                                    t.setData(Uri.parse("https://www.coolapk.com/apk/me.weishu.exp"));
+                                    t.setData(Uri.parse("https://taichi.cool"));
                                     startActivity(t);
                                 })
                                 .create();
@@ -143,7 +143,9 @@ public class ListAppFragment extends VFragment<ListAppContract.ListAppPresenter>
                     }
                     finishActivity();
                 }).setNeutralButton(R.string.what_is_exp, ((dialog, which) -> {
-                    whatIsTaiChi();
+                    Intent t = new Intent(Intent.ACTION_VIEW);
+                    t.setData(Uri.parse("https://taichi.cool"));
+                    startActivity(t);
                 }))
                 .create();
         try {
@@ -196,7 +198,14 @@ public class ListAppFragment extends VFragment<ListAppContract.ListAppPresenter>
 
             if (dataList.size() > 0) {
                 String path = dataList.get(0).path;
-                chooseInstallWay(() -> Installd.startInstallerActivity(getActivity(), dataList), path);
+                chooseInstallWay(() -> {
+                    Activity activity = getActivity();
+                    if (activity == null) {
+                        return;
+                    }
+                    Installd.startInstallerActivity(activity, dataList);
+                    activity.setResult(Activity.RESULT_OK);
+                }, path);
             }
         });
         mSelectFromExternal.setOnClickListener(v -> {
@@ -249,7 +258,10 @@ public class ListAppFragment extends VFragment<ListAppContract.ListAppPresenter>
             return;
         }
 
-        chooseInstallWay(() -> Installd.handleRequestFromFile(getActivity(), path), path);
+        chooseInstallWay(() -> {
+            Installd.handleRequestFromFile(getActivity(), path);
+            getActivity().setResult(Activity.RESULT_OK);
+        }, path);
     }
 
     public static String getPath(Context context, Uri uri) {

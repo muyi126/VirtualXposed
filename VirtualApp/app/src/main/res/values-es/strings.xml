@@ -48,7 +48,7 @@
     <string name="prompt_alipay_not_found">No se encontró Alipay</string>
     <string name="prompt_wait">Por favor, espero un momento…</string>
     <string name="donate_dialog_title">Sobre donar…</string>
-    <string name="donate_dialog_content">No dones a menos que seas adinerado :)</string>
+    <string name="donate_dialog_content">El mantenimiento de VirtualXposed cuesta mucho de mi tiempo, si aprecias mi trabajo, ¡cómprame una taza de café! :)</string>
     <string name="donate_dialog_yes">Donar</string>
     <string name="donate_dialog_no">Cancelar</string>
     <string name="large_app_install_tips">La instalación puede demorar un tiempo, por favor sé paciente :)</string>
@@ -166,4 +166,5 @@
     <string name="install_permission_manager_tips">Permission Manage es implementado por XPrivacyLua, descarga (aproximadamente 1.7M) e instálalo ahora?</string>
     <string name="advance_settings_enable_launcher_summary">Enable Launcher</string>
     <string name="advance_settings_enable_launcher">Enable Launcher</string>
+    <string name="install_complete_and_open">Abierto</string>
 </resources>

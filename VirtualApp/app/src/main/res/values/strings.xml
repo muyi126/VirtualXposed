@@ -39,9 +39,9 @@
     <string name="about_feedback_tips">Group number has been copied to clipboard!</string>
     <string name="about_version_title">Version: %1$s</string>
     <string name="about_donate_title">Donate</string>
-    <string name="reboot_tips_1">Reboot successfull!</string>
-    <string name="reboot_tips_2">Reboot successfull!</string>
-    <string name="reboot_tips_3">Reboot successfull!</string>
+    <string name="reboot_tips_1">Reboot successfully!</string>
+    <string name="reboot_tips_2">Reboot successfully!</string>
+    <string name="reboot_tips_3">Reboot successfully!</string>
     <string name="meizu_device_tips_title">Detect Meizu Device: </string>
     <string name="meizu_device_tips_content">In Meizu OS phones, you can only add an app to VirtualXposed by cloning an existing app that\'s already installed (you cannot install an app in VirtualXposed via sideloading an apk). You must also install XposedInstaller manually, as, unlike installations on other Android phones, it isn\'t built in to VirtualXposed when installing on Meizu OS. Please install XposedInstaller first.</string>
     <string name="donate_alipay">Alipay</string>
@@ -49,7 +49,7 @@
     <string name="prompt_alipay_not_found">Alipay not found.</string>
     <string name="prompt_wait">Wait just a moment…</string>
     <string name="donate_dialog_title">About Donate</string>
-    <string name="donate_dialog_content">Don\'t donate to me if you aren\'t rich :)</string>
+    <string name="donate_dialog_content">The maintaining of VirtualXposed costs lots of my time, if you appreciate my work, buy me a cup of coffee! :)</string>
     <string name="donate_dialog_yes">Donate</string>
     <string name="donate_dialog_no">Cancel</string>
     <string name="large_app_install_tips">Installation may take a while, please be patient… :)</string>
@@ -175,7 +175,7 @@ Currently, EXposed has been put on the app store and renamed to Tai Chi. You can
     <string name="advance_settings_enable_launcher">Enable Launcher</string>
     <string name="exp_introduce_title">An easy way to use Xposed</string>
     <string name="exp_introduce_install">Have a try</string>
-    <string name="what_is_exp">What is TaiChi?</string>
+    <string name="what_is_exp">What\'s TaiChi?</string>
     <string name="install_choose_way">Choose way to install</string>
     <string name="install_choose_content" >You can use Xposed modules through TaiChi except VirtualXposed. VirtualXposed supports Virtual-App，while TaiChi is much more stable.</string>
     <string name="install_choose_taichi">TaiChi</string>
@@ -183,4 +183,5 @@ Currently, EXposed has been put on the app store and renamed to Tai Chi. You can
     <string name="install_go_to_install_exp">Go to install TaiChi</string>
     <string name="install_taichi_while_old_version">The version of TaiChi installed is too old, Please install the latest Taichi!</string>
     <string name="install_go_latest_exp">Install the latest TaiChi</string>
+    <string name="install_complete_and_open">Open</string>
 </resources>
