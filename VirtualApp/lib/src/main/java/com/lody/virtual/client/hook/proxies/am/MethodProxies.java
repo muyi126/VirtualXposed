@@ -375,13 +375,8 @@ class MethodProxies {
 
         @Override
         public Object call(Object who, Method method, Object... args) throws Throwable {
-            String packageName = (String) args[1];
-            if (Constants.WECHAT_PACKAGE.equals(packageName)) {
-                // 解决微信界面跳转狂闪的问题
-                return null;
-            } else {
-                return super.call(who, method, args);
-            }
+            // Many application crash/darkscreen if not return null.
+            return null;
         }
     }
 
@@ -879,6 +874,20 @@ class MethodProxies {
         @Override
         public boolean isEnable() {
             return isAppProcess() || isServerProcess();
+        }
+    }
+
+    // http://aospxref.com/android-10.0.0_r2/xref/frameworks/base/core/java/android/app/ContextImpl.java#1735
+    static class BindIsolatedService extends BindService {
+        @Override
+        public String getMethodName() {
+            return "bindIsolatedService";
+        }
+
+        @Override
+        public boolean beforeCall(Object who, Method method, Object... args) {
+            MethodParameterUtils.replaceLastAppPkg(args);
+            return super.beforeCall(who, method, args);
         }
     }
 
