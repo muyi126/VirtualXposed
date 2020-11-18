@@ -35,6 +35,7 @@ import com.lody.virtual.helper.utils.FileUtils;
 import com.lody.virtual.helper.utils.MD5Utils;
 import com.lody.virtual.helper.utils.VLog;
 
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -69,7 +70,49 @@ public class NewHomeActivity extends NexusLauncherActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
+
     }
+
+    /**
+     * 应用程序运行命令获取 Root权限，设备必须已破解(获得ROOT权限)
+     *
+     * @return 应用程序是/否获取Root权限
+     */
+    public static boolean RootCommand(String command) {
+        Log.d("*** DEBUG ***", "RootCommand:" + command);
+        Process process = null;
+        DataOutputStream os = null;
+        try {
+
+            process = Runtime.getRuntime().exec("su");
+
+            os = new DataOutputStream(process.getOutputStream());
+
+            os.writeBytes(command + "\n");
+
+            os.writeBytes("exit\n");
+
+            os.flush();
+
+            process.waitFor();
+
+        } catch (Exception e) {
+            Log.d("*** DEBUG ***", "ROOT REE" + e.getMessage());
+            return false;
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+                process.destroy();
+            } catch (Exception e) {
+            }
+        }
+        Log.d("*** DEBUG ***", "Root SUC ");
+        return true;
+
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,7 +123,10 @@ public class NewHomeActivity extends NexusLauncherActivity {
         alertForMeizu();
         alertForDonate();
         mDirectlyBack = sharedPreferences.getBoolean(SettingsActivity.DIRECTLY_BACK_KEY, false);
+
+//        upgradeRootPermission(getPackageCodePath());
     }
+
 
     private void installXposed() {
         boolean isXposedInstalled = false;
@@ -166,6 +212,9 @@ public class NewHomeActivity extends NexusLauncherActivity {
 
         // check for wallpaper
         setWallpaper();
+//        String apkRoot="chmod 777 "+getPackageCodePath();
+//        RootCommand(apkRoot);
+
     }
 
     @Override
@@ -233,6 +282,7 @@ public class NewHomeActivity extends NexusLauncherActivity {
             finish();
         }
     }
+
 
     private void alertForDonate() {
         final String TAG = "show_donate";

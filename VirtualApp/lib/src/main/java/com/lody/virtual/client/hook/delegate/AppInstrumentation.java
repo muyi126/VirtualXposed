@@ -108,6 +108,7 @@ public final class AppInstrumentation extends InstrumentationDelegate implements
             throw e;
         }
         VirtualCore.get().getComponentDelegate().afterActivityCreate(activity);
+
     }
 
     @Override

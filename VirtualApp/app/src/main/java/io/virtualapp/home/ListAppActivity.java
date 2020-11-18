@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import java.io.DataOutputStream;
+
 import io.virtualapp.R;
 import io.virtualapp.VCommends;
 import io.virtualapp.abs.ui.VActivity;
@@ -38,6 +40,7 @@ public class ListAppActivity extends VActivity {
         mViewPager.setAdapter(new AppPagerAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewPager);
 
+
     }
 
     @Override
@@ -48,4 +51,6 @@ public class ListAppActivity extends VActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
