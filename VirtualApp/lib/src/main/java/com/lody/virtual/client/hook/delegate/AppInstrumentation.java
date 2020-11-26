@@ -74,6 +74,7 @@ public final class AppInstrumentation extends InstrumentationDelegate implements
         if (icicle != null) {
             BundleCompat.clearParcelledData(icicle);
         }
+        VLog.i(TAG, "activity callActivityOnCreate:: %s", activity.getClass().toString());
         VirtualCore.get().getComponentDelegate().beforeActivityCreate(activity);
         IBinder token = mirror.android.app.Activity.mToken.get(activity);
         ActivityClientRecord r = VActivityManager.get().getActivityRecord(token);
